@@ -187,7 +187,7 @@ input:focus, select:focus {
 }
 
 .section-title {
-    color: #4a5568;
+    color: #f8fafc;
     font-size: 1.4em;
     margin-bottom: 15px;
     padding-bottom: 10px;
@@ -275,7 +275,7 @@ tr:hover {
     letter-spacing: 0.04em;
     text-transform: uppercase;
     font-size: 0.95rem;
-    color: #1e293b;
+    color: #f8fafc;
     margin-top: 24px;
     margin-bottom: 8px;
 }
