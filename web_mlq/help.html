@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - MLQ & MLFQ Tutorial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        .content-section {
+            padding: 30px 0;
+            color: white;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00ffff, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .step-content h5 {
+            color: #00ffff;
+            margin-bottom: 8px;
+        }
+        .algorithm-highlight {
+            background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(102,126,234,0.1));
+            border-left: 4px solid #00ffff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .feature-item {
+            text-align: center;
+            padding: 20px 15px;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .tip-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,255,255,0.05));
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(0,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(15,15,35,0.95); backdrop-filter: blur(10px); z-index: 1030;">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="../index.html" style="color: #00ffff;">
+                <span class="me-2" style="font-size: 1.5rem;">⚙️💻</span>MIT-501 OS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="simulate.html">Simulate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="help.html">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1>📚 MLQ & MLFQ Tutorial</h1>
+        <p>Complete Guide to Multi-Level Queue Scheduling</p>
+    </div>
+
+    <div class="container">
+        <div class="row content-section">
+            <div class="col-12 text-center mb-3">
+                <h2 class="section-title">Getting Started</h2>
+                <p class="lead">Master CPU scheduling algorithms with interactive simulations. Learn MLQ and MLFQ through hands-on experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row content-section">
+            <div class="col-12">
+                <h2 class="section-title">📊 Multi-Level Queue (MLQ)</h2>
+                <div class="algorithm-highlight">
+                    <h4 style="color: #00ffff; margin-bottom: 20px;">What is MLQ?</h4>
+                    <p>MLQ divides processes into separate queues based on process type or priority. Each queue has its own scheduling algorithm and priority level.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-4 text-center">
+                            <span class="feature-icon">🔒</span>
+                            <h6 style="color: #00ffff;">Fixed Priority</h6>
+                            <p>Higher priority queues are served first</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <span class="feature-icon">🚫</span>
+                            <h6 style="color: #00ffff;">No Movement</h6>
+                            <p>Processes stay in their assigned queue</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <span class="feature-icon">⚙️</span>
+                            <h6 style="color: #00ffff;">Different Algorithms</h6>
+                            <p>Each queue uses FCFS, SJF, Priority, or RR</p>
+                        </div>
+                    </div>
+                </div>
+                <h4 style="color: #00ffff; margin: 25px 0 20px 0;">🔧 How to Simulate MLQ:</h4>
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Select Scheduler Type</h5>
+                        <p>Choose "Multi-Level Queue (MLQ)" from the scheduler type dropdown menu.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Configure Queues</h5>
+                        <p>Set number of queues (1-5). Each queue represents a different priority level in your system.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Set Queue Parameters</h5>
+                        <p><strong>Algorithm:</strong> Choose FCFS, SJF, Priority, or Round Robin<br>
+                        <strong>Time Quantum:</strong> Set for Round Robin (ignored for others)<br>
+                        <strong>Priority:</strong> Lower numbers = higher priority</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h5>Add Processes</h5>
+                        <p>Configure processes with arrival time, burst time, and queue assignment.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h5>Run Simulation</h5>
+                        <p>Click "Start Simulation" to see the Gantt chart and performance statistics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row content-section">
+            <div class="col-12">
+                <h2 class="section-title">🔄 Multi-Level Feedback Queue (MLFQ)</h2>
+                <div class="algorithm-highlight">
+                    <h4 style="color: #00ffff; margin-bottom: 20px;">What is MLFQ?</h4>
+                    <p>MLFQ allows processes to move between queues based on their behavior. It's designed to favor interactive processes while ensuring CPU-bound processes eventually get executed.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-4 text-center">
+                            <span class="feature-icon">🔄</span>
+                            <h6 style="color: #00ffff;">Dynamic Priority</h6>
+                            <p>Processes move between queues</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <span class="feature-icon">⏰</span>
+                            <h6 style="color: #00ffff;">Aging Prevention</h6>
+                            <p>Prevents starvation of processes</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <span class="feature-icon">🧠</span>
+                            <h6 style="color: #00ffff;">Adaptive</h6>
+                            <p>Responds to process behavior</p>
+                        </div>
+                    </div>
+                </div>
+                <h4 style="color: #00ffff; margin: 25px 0 20px 0;">🔧 How to Simulate MLFQ:</h4>
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Select MLFQ</h5>
+                        <p>Choose "Multi-Level Feedback Queue (MLFQ)" from the scheduler type.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Set Queue Count</h5>
+                        <p>Use 3-5 queues for optimal results and realistic behavior simulation.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Configure Time Quantums</h5>
+                        <p><strong>Queue 0:</strong> Highest priority, smallest quantum (e.g., 2)<br>
+                        <strong>Queue 1:</strong> Medium priority, medium quantum (e.g., 4)<br>
+                        <strong>Queue 2:</strong> Lower priority, larger quantum (e.g., 8)</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h5>Add Processes</h5>
+                        <p>All processes start in the highest priority queue (Queue 0) initially.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h5>Observe Movement</h5>
+                        <p>Watch processes move between queues based on their execution behavior.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row content-section">
+            <div class="col-12">
+                <h2 class="section-title">⚙️ Process Configuration</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">📝</span>
+                        <h5 style="color: #00ffff;">Process Parameters</h5>
+                        <p><strong>Process ID:</strong> Unique identifier (P1, P2, etc.)<br>
+                        <strong>Arrival Time:</strong> When process enters the system<br>
+                        <strong>Burst Time:</strong> CPU time needed for completion<br>
+                        <strong>Priority:</strong> Process priority (lower = higher priority)<br>
+                        <strong>Queue:</strong> Initial queue assignment (MLQ only)</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎨</span>
+                        <h5 style="color: #00ffff;">Queue Algorithms</h5>
+                        <p><strong>FCFS:</strong> First Come, First Served<br>
+                        <strong>SJF:</strong> Shortest Job First<br>
+                        <strong>SRTF:</strong> Shortest Remaining Time First<br>
+                        <strong>Priority:</strong> Based on process priority<br>
+                        <strong>Round Robin:</strong> Time-sliced execution</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row content-section">
+            <div class="col-12">
+                <h2 class="section-title">📈 Understanding Results</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <h5 style="color: #00ffff;">Gantt Chart</h5>
+                        <p>Visual timeline of process execution with color-coded process blocks and context switches</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⏱️</span>
+                        <h5 style="color: #00ffff;">Performance Metrics</h5>
+                        <p><strong>Turnaround Time:</strong> Completion - Arrival<br>
+                        <strong>Waiting Time:</strong> Turnaround - Burst<br>
+                        <strong>Response Time:</strong> First execution - Arrival</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <h5 style="color: #00ffff;">Statistics</h5>
+                        <p>Average turnaround time, average waiting time, and CPU utilization percentage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row content-section">
+            <div class="col-12">
+                <div class="tip-section">
+                    <h2 class="section-title">💡 Tips for Better Simulations</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 style="color: #00ffff; margin-bottom: 20px;">✅ Best Practices</h5>
+                            <ul>
+                                <li>Start with 2-3 queues for simplicity</li>
+                                <li>Use different arrival times to see queue behavior</li>
+                                <li>Try various burst times (short, medium, long)</li>
+                                <li>Compare MLQ vs MLFQ with same processes</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 style="color: #00ffff; margin-bottom: 20px;">🎓 Learning Scenarios</h5>
+                            <ul>
+                                <li><strong>Interactive vs CPU-bound:</strong> Mix short and long processes</li>
+                                <li><strong>Starvation:</strong> Test with many high-priority processes</li>
+                                <li><strong>Fairness:</strong> Compare average waiting times</li>
+                                <li><strong>Responsiveness:</strong> Check response times for interactive processes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row content-section">
+            <div class="col-12 text-center">
+                <h2 class="section-title">🚀 Ready to Start?</h2>
+                <p class="lead mb-3">Now that you understand the concepts, try the simulator with different configurations!</p>
+                <a href="simulate.html" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 12px 30px; border-radius: 50px;">Go to Simulator</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-4" style="background: rgba(15,15,35,0.9); color: white;">
+        <p>&copy; 1st Semester 2025 - 2026 MIT-501 Operating Systems Course. LSPU-SCC. Educational Simulation Tool.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

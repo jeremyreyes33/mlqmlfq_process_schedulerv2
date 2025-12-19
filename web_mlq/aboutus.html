@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MLQ Scheduler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .team-members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            justify-items: center;
+            margin: 40px 0;
+        }
+
+        .team-member-card {
+            background: rgba(15,15,35,0.9);
+            border-radius: 18px;
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            max-width: 350px;
+            color: #e2e8f0;
+        }
+
+        .team-member-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 26px 70px rgba(0,0,0,0.6);
+            border-color: rgba(0,255,255,0.4);
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #00ffff;
+            box-shadow: 0 8px 20px rgba(0,255,255,0.3);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member-card .member-name {
+            color: #00ffff;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .team-member-card .member-role {
+            color: #e2e8f0;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .member-description {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(15,15,35,0.95); backdrop-filter: blur(10px); z-index: 1030;">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="../index.html" style="color: #00ffff;">
+                <span class="me-2" style="font-size: 1.5rem;">⚙️💻</span>MIT-501 OS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="simulate.html">Simulate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="help.html">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="aboutus.html">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="display-3 fw-bold mb-4">👥 About Our Team</h1>
+            <p class="lead mb-4">J. Reyes and O. Maravilla</p>
+            <p class="lead mb-4">MIT-501 Operating Systems Course - Process Scheduler Simulator Development Team</p>
+        </div>
+    </section>
+    <hr>
+    
+    <!-- Team Members -->
+    <div class="container">
+        <div class="team-members-grid">
+            <div class="team-member-card">
+                <div class="profile-image">
+                    <img src="../img/jeremy_pix.jpg" alt="Jeremy C. Reyes" />
+                </div>
+                <h3 class="member-name">Jeremy C. Reyes</h3>
+                <p class="member-role">MIT Student</p>
+                <p class="member-description">Part-time IT Instructor LSPU-SCC</p>
+            </div>
+            <div class="team-member-card">
+                <div class="profile-image">
+                    <img src="../img/omar_pix.jpg" alt="Omar Irish S. Maravilla" />
+                </div>
+                <h3 class="member-name">Omar Irish S. Maravilla</h3>
+                <p class="member-role">MIT Student</p>
+                <p class="member-description">Part-time COE Instructor SLSU</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-card h-40">
+                    <h3>🎯 Our Mission</h3>
+                    <p>To provide an intuitive and educational platform for understanding Multi-Level Queue (MLQ) and Multi-Level Feedback Queue (MLFQ) scheduling algorithms.</p>
+                    <ul class="list-unstyled">
+                        <li>✅ Educational excellence</li>
+                        <li>✅ Interactive learning</li>
+                        <li>✅ Algorithm visualization</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-40">
+                    <h3>⚡ Key Features</h3>
+                    <p>Our simulator provides comprehensive tools for understanding process scheduling algorithms with real-time visualization.</p>
+                    <ul class="list-unstyled">
+                        <li>✅ Interactive MLQ & MLFQ simulation</li>
+                        <li>✅ Real-time Gantt chart visualization</li>
+                        <li>✅ Performance metrics calculation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-40">
+                    <h3>🔬 Educational Value</h3>
+                    <p>A comprehensive learning tool for operating systems concepts, demonstrating scheduling algorithm trade-offs.</p>
+                    <ul class="list-unstyled">
+                        <li>✅ FCFS, SJF, SRTF algorithms</li>
+                        <li>✅ Priority & Round Robin</li>
+                        <li>✅ Multi-level queue systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-4" style="background: rgba(15,15,35,0.9); color: white;">
+        <p>&copy; 1st Semester 2025 - 2026 MIT-501 Operating Systems Course. LSPU-SCC. Educational Simulation Tool.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
