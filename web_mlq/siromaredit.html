@@ -1,0 +1,349 @@
+
+<!-- MULTI LEVEL FEEDBACK QUEUE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MLFQ Simulator with 3-Layer Gantt Chart</title>
+<style>
+body{
+  background:#06142E;
+  font-family:Arial;
+  color:white;
+}
+.container{
+  width:95%;
+  margin:auto;
+}
+.panel{
+  background:#0B2A55;
+  padding:15px;
+  border-radius:10px;
+  margin-top:10px;
+  box-shadow:0 0 10px #00FFFF;
+}
+h1{
+  text-align:center;
+  color:#00FFFF;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  color:white;
+}
+th,td{
+  border:1px solid #00ffff;
+  padding:5px;
+  text-align:center;
+}
+input, select{
+  padding:5px;
+  width:90%;
+}
+button{
+  padding:10px 15px;
+  background:#00B3FF;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+button:hover{
+  background:#00FFFF;
+  color:black;
+}
+
+/* Gantt Chart Styles */
+#gantt{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  margin-top:10px;
+}
+.gantt-layer{
+  display:flex;
+  flex-wrap:wrap;
+  background:#021B3A;
+  padding:5px;
+  border-radius:5px;
+  min-height:40px;
+  align-items:center;
+}
+.gantt-layer h4{
+  margin:0 10px 0 0;
+  color:#00FFFF;
+  font-size:14px;
+}
+.gantt-box {
+  min-width:40px;
+  padding:8px 5px 20px 5px;
+  margin:2px;
+  border-radius:5px;
+  text-align:center;
+  font-weight:bold;
+  color:black;
+  position: relative;
+}
+.gantt-box span.time {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  font-size: 10px;
+  color: #ffffff;
+}
+
+.idle{background:#888;}
+.q0{background:#FFD700;}
+.q1{background:#00FF7F;}
+.q2{background:#FF7F50;}
+.q3{background:#ADD8E6;}
+.q4{background:#FF00FF;}
+
+/* Summary */
+.summary{
+  display:flex;
+  justify-content:space-around;
+  text-align:center;
+  padding:15px;
+  border-radius:10px;
+  background:#021B3A;
+  border:2px solid #00ffff;
+  box-shadow:0 0 12px #00ffff90;
+}
+.summary div{
+  width:45%;
+  padding:10px;
+  border-radius:10px;
+  background:#0B2A55;
+}
+.summary h3{
+  color:#00FFFF;
+  margin-bottom:5px;
+}
+.summary p{
+  font-size:35px;
+  font-weight:bold;
+  margin:0;
+  color:#FFD700;
+}
+select, input{
+  width: 80px;
+  max-width: 80px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>MLFQ Simulator (RR/SJF/FCFS)</h1>
+
+<!-- Queue Settings -->
+<div class="panel">
+<h2>Queue Settings</h2>
+<label>Queue Scheduling Types:</label><br>
+<select id="q0"><option value="RR">RR</option><option value="SJF">SJF</option><option value="FCFS">FCFS</option></select>
+<input id="q0q" placeholder="Quantum" value="2"><br>
+<select id="q1"><option value="RR">RR</option><option value="SJF">SJF</option><option value="FCFS">FCFS</option></select>
+<input id="q1q" placeholder="Quantum" value="3"><br>
+<select id="q2"><option value="RR">RR</option><option value="SJF">SJF</option><option value="FCFS">FCFS</option></select>
+<input id="q2q" placeholder="Quantum" value="0" type="hidden">
+</div>
+
+<!-- Processes -->
+<div class="panel">
+<h2>Processes</h2>
+<table id="procTable">
+<tr><th>PID</th><th>Arrival Time</th><th>Burst Time</th></tr>
+<tr><td>1</td><td><input value="3"></td><td><input value="4"></td></tr>
+<tr><td>2</td><td><input value="5"></td><td><input value="9"></td></tr>
+<tr><td>3</td><td><input value="8"></td><td><input value="4"></td></tr>
+<tr><td>4</td><td><input value="0"></td><td><input value="7"></td></tr>
+<tr><td>5</td><td><input value="12"></td><td><input value="6"></td></tr>
+</table>
+<br>
+<button onclick="addRow()">Add Process</button>
+<button onclick="runMLFQ()">Run Simulation</button>
+</div>
+
+<!-- Gantt Chart -->
+<div class="panel">
+<h2>Gantt Chart</h2>
+<div id="gantt">
+  <div class="gantt-layer" id="gantt-q0"><h4>Q1</h4></div>
+  <div class="gantt-layer" id="gantt-q1"><h4>Q2</h4></div>
+  <div class="gantt-layer" id="gantt-q2"><h4>Q3</h4></div>
+</div>
+</div>
+
+<!-- Results -->
+<div class="panel">
+<h2>Results</h2>
+<table>
+<thead>
+<tr><th>PID</th><th>Arrival</th><th>Burst</th><th>Finish</th><th>Turnaround</th><th>Waiting</th></tr>
+</thead>
+<tbody id="resultBody"></tbody>
+</table>
+</div>
+
+<!-- Summary -->
+<div class="panel">
+<h2>Summary</h2>
+<!-- Add in Summary Panel -->
+<div id="summaryBox" class="summary">
+  <div>
+    <h3>Average Turnaround Time</h3>
+    <p id="attVal">—</p>
+  </div>
+  <div>
+    <h3>Average Waiting Time</h3>
+    <p id="awtVal">—</p>
+  </div>
+  <div>
+    <h3>CPU Utilization</h3>
+    <p id="cpuUtil">—</p>
+  </div>
+</div>
+
+
+<script>
+// Process class
+class Process{
+  constructor(pid,arrival,burst){
+    this.pid=pid;
+    this.arrival=arrival;
+    this.burst=burst;
+    this.remaining=burst;
+    this.finish=null;
+  }
+}
+
+// Add process row
+function addRow(){
+  let table=document.getElementById("procTable");
+  let r=table.rows.length;
+  let row=table.insertRow(-1);
+  row.innerHTML=`<td>${r}</td><td><input value="0"></td><td><input value="1"></td>`;
+}
+
+// Draw Gantt box
+function drawGantt(pid, css, time){
+  let div=document.createElement("div");
+  div.className="gantt-box "+css;
+  div.innerText=pid==="IDLE"?"IDLE":"P"+pid;
+
+  let span=document.createElement("span");
+  span.className="time";
+  span.innerText=time;
+  div.appendChild(span);
+
+  let layerId = css==="q0"?"gantt-q0":css==="q1"?"gantt-q1":css==="q2"?"gantt-q2":"gantt-q0";
+  document.getElementById(layerId).appendChild(div);
+}
+
+// Run MLFQ simulation
+function runMLFQ(){
+  // clear layers
+  document.getElementById("gantt-q0").innerHTML="<h4>Q1</h4>";
+  document.getElementById("gantt-q1").innerHTML="<h4>Q2</h4>";
+  document.getElementById("gantt-q2").innerHTML="<h4>Q3</h4>";
+
+  let queueConfig=[
+    { type: q0.value, quantum: parseInt(q0q.value)||0 },
+    { type: q1.value, quantum: parseInt(q1q.value)||0 },
+    { type: q2.value, quantum: parseInt(q2q.value)||0 }
+  ];
+
+  let table=document.getElementById("procTable");
+  let processes=[];
+  for(let i=1;i<table.rows.length;i++){
+    let pid=i;
+    let at=parseInt(table.rows[i].cells[1].children[0].value);
+    let bt=parseInt(table.rows[i].cells[2].children[0].value);
+    processes.push(new Process(pid,at,bt));
+  }
+
+  processes.sort((a,b)=>a.arrival-b.arrival);
+
+  let time=0, finished=0;
+  let queues=[[],[],[]];
+  let added=new Set();
+
+  while(finished < processes.length){
+    processes.forEach(p=>{
+      if(p.arrival<=time && !added.has(p.pid)){
+        queues[0].push(p);
+        added.add(p.pid);
+      }
+    });
+
+    let qIndex=queues.findIndex(q=>q.length>0);
+    if(qIndex===-1){
+      drawGantt("IDLE","idle",time);
+      time++;
+      continue;
+    }
+
+    let mode=queueConfig[qIndex].type;
+    if(mode==="SJF") queues[qIndex].sort((a,b)=>a.remaining-b.remaining);
+    let proc=queues[qIndex].shift();
+
+    let runTime = mode==="RR"?Math.min(proc.remaining, queueConfig[qIndex].quantum):1;
+
+    for(let t=0;t<runTime;t++){
+      if(proc.remaining===0) break;
+      drawGantt(proc.pid,"q"+qIndex,time);
+      proc.remaining--;
+      time++;
+      processes.forEach(p=>{
+        if(p.arrival<=time && !added.has(p.pid)){
+          queues[0].push(p);
+          added.add(p.pid);
+        }
+      });
+    }
+
+    if(proc.remaining===0){
+      proc.finish=time;
+      finished++;
+    }else{
+      let next = mode==="RR"?Math.min(qIndex+1,2):qIndex;
+      queues[next].push(proc);
+    }
+  }
+
+  // results table
+  let body=document.getElementById("resultBody");
+  body.innerHTML="";
+  let totalTAT=0,totalWT=0;
+  processes.forEach(p=>{
+    let tat=p.finish-p.arrival;
+    let wt=tat-p.burst;
+    totalTAT+=tat;
+    totalWT+=wt;
+    // CPU Utilization
+let totalBusy = processes.reduce((sum, p) => sum + p.burst, 0);
+let totalTime = Math.max(...processes.map(p => p.finish));
+let cpuUtil = ((totalBusy / totalTime) * 100).toFixed(2);
+
+document.getElementById("cpuUtil").innerText = cpuUtil + " %";
+
+    body.innerHTML+=`<tr>
+      <td>${p.pid}</td>
+      <td>${p.arrival}</td>
+      <td>${p.burst}</td>
+      <td>${p.finish}</td>
+      <td>${tat}</td>
+      <td>${wt}</td>
+    </tr>`;
+  });
+
+  document.getElementById("attVal").innerText=(totalTAT/processes.length).toFixed(2);
+  document.getElementById("awtVal").innerText=(totalWT/processes.length).toFixed(2);
+}
+</script>
+</body>
+</html>
